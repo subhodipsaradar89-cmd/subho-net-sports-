@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>SUBHO•NΞT•SPORTS</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{background:#0a0a0a;color:#fff;font-family:'Segoe UI',Arial,sans-serif;min-height:100vh;background-image:radial-gradient(circle at 20% 20%,rgba(56,189,248,.08) 0%,transparent 50%),radial-gradient(circle at 80% 80%,rgba(129,140,248,.08) 0%,transparent 50%)}
+        .header{text-align:center;padding:40px 20px 30px;position:relative}
+        .header::after{content:'';position:absolute;bottom:0;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,rgba(56,189,248,.4),transparent)}
+        .logo-icon{font-size:50px;display:block;margin-bottom:12px;animation:float 3s ease-in-out infinite}
+        @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+        .brand{font-size:clamp(28px,6vw,48px);font-weight:900;background:linear-gradient(135deg,#ffffff 0%,#38bdf8 50%,#818cf8 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:2px;text-shadow:0 0 40px rgba(56,189,248,.15)}
+        .tagline{color:#64748b;font-size:11px;letter-spacing:4px;text-transform:uppercase;margin-top:6px;font-weight:600}
+        .container{max-width:1100px;margin:0 auto;padding:0 16px;flex:1}
+        .live-bar{display:flex;justify-content:space-between;align-items:center;padding:12px 0 8px;border-bottom:1px solid rgba(255,255,255,.05);margin-bottom:16px}
+        .live-dot{display:inline-block;width:8px;height:8px;background:#22c55e;border-radius:50%;margin-right:8px;animation:pulse 1.5s ease-in-out infinite;box-shadow:0 0 12px rgba(34,197,94,.5)}
+        @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.6)}}
+        .live-text{color:#94a3b8;font-size:12px;font-weight:600;letter-spacing:.5px}
+        .channel-count{color:#64748b;font-size:12px;font-weight:600;background:rgba(255,255,255,.06);padding:4px 12px;border-radius:20px;border:1px solid rgba(255,255,255,.06)}
+        .search-wrap{position:relative;margin-bottom:18px}
+        .search-wrap input{width:100%;padding:14px 18px 14px 48px;border-radius:14px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);color:#fff;font-size:14px;transition:all .3s;outline:none}
+        .search-wrap input::placeholder{color:#475569}
+        .search-wrap input:focus{border-color:rgba(56,189,248,.4);background:rgba(255,255,255,.07);box-shadow:0 0 30px rgba(56,189,248,.06)}
+        .search-icon{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:#475569;font-size:18px}
+        .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:14px;padding-bottom:30px}
+        .channel{background:linear-gradient(145deg,rgba(17,24,39,.96),rgba(7,11,19,.98));border-radius:16px;padding:18px 14px 14px;border:1px solid rgba(255,255,255,.06);transition:all .3s cubic-bezier(.4,0,.2,1);cursor:pointer;position:relative;overflow:hidden;min-height:130px;display:flex;flex-direction:column;justify-content:space-between}
+        .channel::before{content:'';position:absolute;top:-30%;right:-20%;width:80px;height:80px;background:radial-gradient(circle,rgba(56,189,248,.08),transparent 70%);border-radius:50%;pointer-events:none}
+        .channel:hover{transform:translateY(-4px);border-color:rgba(56,189,248,.25);box-shadow:0 12px 40px rgba(0,0,0,.4)}
+        .channel:active{transform:scale(.97)}
+        .channel-top{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1}
+        .channel-badge{font-size:9px;font-weight:800;letter-spacing:1.2px;color:#7dd3fc;background:rgba(56,189,248,.1);padding:2px 10px;border-radius:20px;border:1px solid rgba(56,189,248,.1)}
+        .channel-live{font-size:8px;font-weight:700;color:#4ade80;display:flex;align-items:center;gap:4px}
+        .channel-live .mini-dot{width:5px;height:5px;background:#4ade80;border-radius:50%;display:inline-block;animation:pulse 1.5s ease-in-out infinite}
+        .channel-name{font-size:15px;font-weight:700;margin:12px 0 14px;line-height:1.3;position:relative;z-index:1;color:#e2e8f0}
+        .watch-btn{width:100%;padding:10px;border:none;border-radius:10px;font-size:11px;font-weight:700;letter-spacing:.5px;color:#020617;background:linear-gradient(135deg,#e2e8f0,#bae6fd);cursor:pointer;transition:all .3s;position:relative;z-index:1}
+        .watch-btn:hover{transform:scale(1.02);box-shadow:0 4px 20px rgba(56,189,248,.2)}
+        .watch-btn:active{transform:scale(.96)}
+        .empty{display:none;text-align:center;padding:60px 20px;color:#64748b}
+        .empty span{font-size:48px;display:block;margin-bottom:12px}
+        .footer{text-align:center;padding:20px 0 30px;border-top:1px solid rgba(255,255,255,.04);margin-top:10px}
+        .footer .powered{color:#475569;font-size:8px;letter-spacing:3px;text-transform:uppercase;font-weight:700}
+        .footer .brand-footer{font-size:16px;font-weight:900;background:linear-gradient(90deg,#38bdf8,#818cf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:6px 0 10px}
+        .whatsapp-link{display:inline-flex;align-items:center;gap:8px;padding:8px 20px;border-radius:30px;border:1px solid rgba(34,197,94,.2);color:#4ade80;text-decoration:none;font-size:10px;font-weight:700;letter-spacing:.5px;transition:all .3s;background:rgba(34,197,94,.05)}
+        .whatsapp-link:hover{background:rgba(34,197,94,.1);border-color:rgba(34,197,94,.4)}
+        @media(max-width:520px){.header{padding:28px 16px 22px}.grid{grid-template-columns:repeat(2,1fr);gap:10px}.channel{padding:14px 12px 12px;min-height:120px}.channel-name{font-size:13px}.watch-btn{font-size:10px;padding:8px}}
+        @media(max-width:380px){.grid{grid-template-columns:1fr}}
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <span class="logo-icon">🏆</span>
+        <div class="brand">SUBHO•NΞT•SPORTS</div>
+        <div class="tagline">PREMIUM SPORTS NETWORK</div>
+    </div>
+
+    <div class="container">
+        <div class="live-bar">
+            <span class="live-text"><span class="live-dot"></span> LIVE SPORTS</span>
+            <span class="channel-count" id="count">Loading...</span>
+        </div>
+
+        <div class="search-wrap">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="search" placeholder="Search sports channel...">
+        </div>
+
+        <div class="grid" id="channels"></div>
+        <div class="empty" id="empty"><span>📺</span>No sports channel found.</div>
+    </div>
+
+    <div class="footer">
+        <div class="powered">POWERED BY</div>
+        <div class="brand-footer">SUBHO•NΞT•SPORTS</div>
+        <a href="https://whatsapp.com/channel/0029Vb8nauA84OmAXcNW3U26" target="_blank" class="whatsapp-link">✆ JOIN WHATSAPP CHANNEL</a>
+    </div>
+
+<script>
+// ======================== DIRECT DATA (NO JSON FETCH) ========================
+const channels = [
+{id:"STEN1",name:"Sony Sports 1 SD",stream_url:"https://jiotvmblive.cdn.jio.com/bpk-tv/Ten_1_MOB/WDVLive/index.mpd",key_id:"3394be91407c5fe99d784d2f2d6d4a12",key:"58665e1df41f9f22ed73c56384bb3f51",cookie:"__hdnea__=st=1786714360~exp=1786735960~acl=/*~hmac=bca66e5e89b002bebeaa3ee66972e2bc6de49570fcb36ed4fcea8f36a72ca9b9"},
+{id:"STEN2",name:"Sony Sports 2 SD",stream_url:"https://jiotvmblive.cdn.jio.com/bpk-tv/Ten_2_MOB/WDVLive/index.mpd",key_id:"671ce7c8ccc95e0a95cba0d12831d12e",key:"175d284c9647b6feb379e7c1650a4f82",cookie:"__hdnea__=st=1786714360~exp=1786735960~acl=/*~hmac=bca66e5e89b002bebeaa3ee66972e2bc6de49570fcb36ed4fcea8f36a72ca9b9"},
+{id:"STEN3",name:"Sony Sports 3 SD",stream_url:"https://jiotvmblive.cdn.jio.com/bpk-tv/Ten_3_MOB/WDVLive/index.mpd",key_id:"68318f7c97c55ba6ab8d0398a88fed3e",key:"d312fb3325b4eb9462b4a0d2b6794adf",cookie:"__hdnea__=st=1786714360~exp=1786735960~acl=/*~hmac=bca66e5e89b002bebeaa3ee66972e2bc6de49570fcb36ed4fcea8f36a72ca9b9"},
+{id:"STENT",name:"Sony Sports 4 Tamil",stream_url:"https://jiotvmblive.cdn.jio.com/bpk-tv/Ten_4_Tamil_MOB/WDVLive/index.mpd",key_id:"0df5f800775c5979ab8aeaff28ee674b",key:"47dd1b9c8d4049760059aab27bddf1cb",cookie:"__hdnea__=st=1786714360~exp=1786735960~acl=/*~hmac=bca66e5e89b002bebeaa3ee66972e2bc6de49570fcb36ed4fcea8f36a72ca9b9"},
+{id:"STENTU",name:"Sony Sports 4 Telugu",stream_url:"https://jiotvmblive.cdn.jio.com/bpk-tv/Ten_4_Telugu_MOB/WDVLive/index.mpd",key_id:"494a8a050ecc5a22adab6dc304ead1b4",key:"9b3bbf2ccb71a876a2bbeb9cde00d7bf",cookie:"__hdnea__=st=1786714360~exp=1786735960~acl=/*~hmac=bca66e5e89b002bebeaa3ee66972e2bc6de49570fcb36ed4fcea8f36a72ca9b9"},
+{id:"STEN5",name:"Sony Sports 5 SD",stream_url:"https://jiotvmblive.cdn.jio.com/bpk-tv/Sony_Six_SD_MOB/WDVLive/index.mpd",key_id:"d2d8709de11d5955b60c57d3c955733e",key:"7655200b24bf82808fb8addf2f02847b",cookie:"__hdnea__=st=1786714360~exp=1786735960~acl=/*~hmac=bca66e5e89b002bebeaa3ee66972e2bc6de49570fcb36ed4fcea8f36a72ca9b9"},
+{id:"E1SD",name:"Star Sports 1 SD",stream_url:"https://jiotvpllive.cdn.jio.com//bpk-tv/Star_Sports_1_BTS/WDVLive/index.mpd",key_id:"df20894ec30954d3b28097c138f4cfda",key:"ff9b6292b1cddbd11a046029cb314634",cookie:"__hdnea__=st=1786730806~exp=1786752406~acl=/bpk-tv/Star_Sports_1_BTS/WDVLive/*~hmac=0a06c34ec86d425ffdc46e071f0774142e8c1da60d989837dc8b942721c3c758"},
+{id:"E1HD",name:"Star Sports 1 HD",stream_url:"https://jiotvpllive.cdn.jio.com//bpk-tv/Star_Sports_HD1_BTS/WDVLive/index.mpd",key_id:"965dc2ddb1d85138ad787999a7f30ca5",key:"859695076e67fe961836b564db6d689c",cookie:"__hdnea__=st=1786728251~exp=1786749851~acl=/bpk-tv/Star_Sports_HD1_BTS/WDVLive/*~hmac=45f0f1c31631fe311aede55b5e35283b2383562f226130f52143440e36f8008b"},
+{id:"H1SD",name:"Star Sports 1 Hindi",stream_url:"https://jiotvpllive.cdn.jio.com//bpk-tv/Star_Sports_1_Hindi_BTS/WDVLive/index.mpd",key_id:"8ea9b607549252068e260a5f4d7dd321",key:"350c0aaffedf51cc1502e9543c7c885e",cookie:"__hdnea__=st=1786718134~exp=1786739734~acl=/bpk-tv/Star_Sports_1_Hindi_BTS/WDVLive/*~hmac=cbcb19f52f491b675c4f8090a1bf1b3ebda2e225c7f7a4bc129558fa3d3fc3fd"},
+{id:"H1HD",name:"Star Sports 1 Hindi HD",stream_url:"https://jiotvpllive.cdn.jio.com//bpk-tv/Star_Sports_HD1_Hindi_BTS/WDVLive/index.mpd",key_id:"400131994b445d8c8817202248760fda",key:"2d56cb6f07a75b9aff165d534ae2bfc4",cookie:"__hdnea__=st=1786726183~exp=1786747783~acl=/bpk-tv/Star_Sports_HD1_Hindi_BTS/WDVLive/*~hmac=030b6b095da95226d3d1a72d43956f5f7bde841d8c2681ce1099b26fa0a9e373"},
+{id:"E2SD",name:"Star Sports 2 SD",stream_url:"https://jiotvpllive.cdn.jio.com//bpk-tv/Star_Sports_2_BTS/WDVLive/index.mpd",key_id:"fc3aafe80845584199a637249fad2ffa",key:"ca4474972fdb4bf8ecb164482853c692",cookie:"__hdnea__=st=1786725112~exp=1786746712~acl=/bpk-tv/Star_Sports_2_BTS/WDVLive/*~hmac=3f739b2ad7f66efc74c3b16c45254a2e67a29f282af21bc777e8add15ee5ec67"},
+{id:"E2HD",name:"Star Sports 2 HD",stream_url:"https://jiotvpllive.cdn.jio.com//bpk-tv/Star_Sports_HD2_BTS/WDVLive/index.mpd",key_id:"9457eb90129456fa8ea95e10ba4ac51e",key:"e620a970cea474c491ac78ae71a4d764",cookie:"__hdnea__=st=1786729599~exp=1786751199~acl=/bpk-tv/Star_Sports_HD2_BTS/WDVLive/*~hmac=d015f699dbd56fa84a6008ea1f99676d2416fb7f04972ae0f28ab0e91461b2dc"},
+{id:"SS3",name:"Star Sports 3 SD",stream_url:"https://jiotvpllive.cdn.jio.com//bpk-tv/Star_Sports_3_BTS/WDVLive/index.mpd",key_id:"e4e8647eaf0659ac85f61765a5abcdc1",key:"d749c9b27505beb0e1a8b6c30ca65de6",cookie:"__hdnea__=st=1786720348~exp=1786741948~acl=/bpk-tv/Star_Sports_3_BTS/WDVLive/*~hmac=c01d3ea1e43605ba91eb971ab071b545c6eb9281a2b3f4e10f44746bbb00c89d"}
+];
+
+function render(list){
+    const container=document.getElementById('channels');
+    const empty=document.getElementById('empty');
+    const count=document.getElementById('count');
+    container.innerHTML='';
+    if(list.length===0){count.textContent='0 CHANNELS';empty.style.display='block';return;}
+    empty.style.display='none';
+    count.textContent=list.length+' CHANNELS';
+    list.forEach(ch=>{
+        const card=document.createElement('div');
+        card.className='channel';
+        card.innerHTML=`
+            <div>
+                <div class="channel-top">
+                    <span class="channel-badge">SPORTS</span>
+                    <span class="channel-live"><span class="mini-dot"></span> LIVE</span>
+                </div>
+                <div class="channel-name">${ch.name}</div>
+            </div>
+            <button class="watch-btn" data-id="${ch.id}">▶ WATCH NOW</button>
+        `;
+        card.querySelector('.watch-btn').addEventListener('click',function(e){
+            e.stopPropagation();
+            const id=this.dataset.id;
+            const channel=list.find(c=>c.id===id);
+            if(!channel)return;
+            const params=new URLSearchParams({
+                id:channel.id,name:channel.name,
+                stream_url:channel.stream_url||'',
+                key_id:channel.key_id||'',
+                key:channel.key||'',
+                cookie:channel.cookie||''
+            });
+            window.open('player.html?'+params.toString(),'_blank');
+        });
+        card.addEventListener('click',function(){this.querySelector('.watch-btn').click();});
+        container.appendChild(card);
+    });
+}
+
+document.getElementById('search').addEventListener('input',function(){
+    const q=this.value.toLowerCase().trim();
+    const cards=document.querySelectorAll('.channel');
+    let visible=0;
+    cards.forEach(card=>{
+        const name=card.querySelector('.channel-name').textContent.toLowerCase();
+        if(name.includes(q)){card.style.display='flex';visible++;}
+        else{card.style.display='none';}
+    });
+    document.getElementById('empty').style.display=visible===0?'block':'none';
+    document.getElementById('count').textContent=visible+' CHANNELS';
+});
+
+render(channels);
+</script>
+</body>
+</html>
