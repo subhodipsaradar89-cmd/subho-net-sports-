@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PLAYER</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{background:#000;display:flex;justify-content:center;align-items:center;height:100vh;font-family:Arial}
+        #c{width:100%;max-width:800px;background:#111;border-radius:12px;overflow:hidden}
+        #h{display:flex;justify-content:space-between;padding:12px 16px;background:#0a0a0a;border-bottom:1px solid #1a1a1a;color:#fff}
+        #h button{background:none;border:none;color:#888;font-size:20px;cursor:pointer}
+        #v{background:#000;min-height:300px;display:flex;align-items:center;justify-content:center}
+        video{width:100%;max-height:70vh;background:#000;display:block}
+        #s{padding:10px 16px;background:#0a0a0a;border-top:1px solid #1a1a1a;color:#60a5fa;font-size:12px;text-align:center}
+    </style>
+</head>
+<body>
+<div id="c">
+    <div id="h"><h3 id="t">SUBHO•NET•SPORTS</h3><button onclick="window.close()">✕</button></div>
+    <div id="v"><video id="p" controls autoplay playsinline></video></div>
+    <div id="s">⏳ Loading...</div>
+</div>
+<script>
+const u=new URLSearchParams(location.search);
+const url=u.get('stream_url');
+const name=u.get('name')||'Channel';
+document.getElementById('t').textContent=name+' | SUBHO';
+const st=document.getElementById('s');
+if(!url){st.innerHTML='❌ No URL';throw 'No URL'}
+const v=document.getElementById('p');
+v.src=url;
+v.play().then(()=>st.innerHTML='▶️ Live: '+name).catch(()=>st.innerHTML='⚠️ Tap play');
+v.onerror=()=>st.innerHTML='❌ Error';
+</script>
+</body>
+</html>
