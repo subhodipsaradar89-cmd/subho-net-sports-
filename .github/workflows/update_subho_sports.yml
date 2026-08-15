@@ -28,7 +28,7 @@ jobs:
 
       - name: Configure Git
         run: |
-          git config --global user.name "Subho"
+          git config --global user.name "Subho Sports Bot"
           git config --global user.email "subho@users.noreply.github.com"
 
       - name: Commit and Push Changes
