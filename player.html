@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUBHO PLAYER</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{background:#000;display:flex;justify-content:center;align-items:center;height:100vh;font-family:Arial}
+        #c{width:100%;max-width:800px;background:#111;border-radius:12px;overflow:hidden}
+        #h{display:flex;justify-content:space-between;padding:12px 16px;background:#0a0a0a;border-bottom:1px solid #1a1a1a;color:#fff}
+        #h button{background:none;border:none;color:#888;font-size:20px;cursor:pointer}
+        #v{background:#000;min-height:300px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;color:#555;font-size:14px}
+        video{width:100%;max-height:70vh;background:#000;display:block}
+        #s{padding:10px 16px;background:#0a0a0a;border-top:1px solid #1a1a1a;color:#60a5fa;font-size:12px;text-align:center}
+        .error{color:#f87171}
+        .loader{width:30px;height:30px;border:3px solid #1a1a1a;border-top:3px solid #38bdf8;border-radius:50%;animation:spin 1s linear infinite}
+        @keyframes spin{to{transform:rotate(360deg)}}
+    </style>
+</head>
+<body>
+<div id="c">
+    <div id="h"><h3 id="t">SUBHO•NET•SPORTS</h3><button onclick="window.close()">✕</button></div>
+    <div id="v">
+        <div class="loader" id="loader"></div>
+        <div id="msg">Loading stream...</div>
+        <video id="p" controls playsinline style="display:none"></video>
+    </div>
+    <div id="s">⏳ Connecting...</div>
+</div>
+<script>
+const urlParams = new URLSearchParams(window.location.search);
+const streamUrl = urlParams.get('stream_url');
+const channelName = urlParams.get('name') || 'Channel';
+const keyId = urlParams.get('key_id') || '';
+const key = urlParams.get('key') || '';
+const cookie = urlParams.get('cookie') || '';
+
+const title = document.getElementById('t');
+const video = document.getElementById('p');
+const loader = document.getElementById('loader');
+const msg = document.getElementById('msg');
+const status = document.getElementById('s');
+
+title.textContent = channelName + ' | SUBHO•NET•SPORTS';
+
+if (!streamUrl) {
+    msg.textContent = '❌ No stream URL';
+    status.innerHTML = '❌ Error: Missing stream URL';
+    loader.style.display = 'none';
+    return;
+}
+
+// Show stream info in console
+console.log('Stream URL:', streamUrl);
+console.log('Key ID:', keyId);
+console.log('Key:', key);
+console.log('Cookie:', cookie);
+
+// Load video
+video.src = streamUrl;
+video.style.display = 'block';
+loader.style.display = 'none';
+msg.textContent = '▶️ Playing ' + channelName;
+status.innerHTML = '▶️ Live: ' + channelName;
+
+video.play().catch(err => {
+    console.warn('Auto-play blocked:', err);
+    msg.textContent = '▶️ Tap play to start';
+    status.innerHTML = '⏸️ Tap play';
+});
+
+video.onerror = function() {
+    const err = video.error;
+    console.error('Video error:', err);
+    msg.textContent = '❌ Stream error: ' + (err ? err.message : 'Unknown');
+    status.innerHTML = '❌ Error loading stream';
+    loader.style.display = 'none';
+};
+
+video.onplaying = function() {
+    msg.textContent = '▶️ Playing ' + channelName;
+    status.innerHTML = '▶️ Live: ' + channelName;
+};
+
+video.onwaiting = function() {
+    status.innerHTML = '⏳ Buffering...';
+};
+</script>
+</body>
+</html>
