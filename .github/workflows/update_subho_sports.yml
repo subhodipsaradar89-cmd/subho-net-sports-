@@ -1,0 +1,38 @@
+name: Update Subho Sports JSON
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install Dependencies
+        run: pip install requests
+
+      - name: Run Fetch Script
+        run: python update_script.py
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "Subho"
+          git config --global user.email "subho@users.noreply.github.com"
+
+      - name: Commit and Push Changes
+        run: |
+          git add Data/subho_sports.json
+          git diff --staged --quiet || git commit -m "Auto update subho_sports.json [skip ci]"
+          git push
